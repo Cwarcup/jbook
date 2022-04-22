@@ -14,7 +14,6 @@ const App = () => {
       worker: true,
       wasmURL: './esbuild.wasm',
     });
-
   };
 
   // run once when the component is mounted
@@ -22,7 +21,19 @@ const App = () => {
     startServer();
   }, []);
 
-  const onClick = () => {};
+  const onClick = async () => {
+    if (!ref.current) {
+      return;
+    }
+
+    const result = await ref.current.transform(input, {
+      loader: 'jsx',
+      target: 'es2015',
+    });
+
+    setCode(result.code);
+  };
+
   return (
     <div>
       <textarea
