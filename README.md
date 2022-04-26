@@ -66,5 +66,19 @@ We will go with the local approach.
 
 # Webpack Replacement
 
-The issue is that Webpack does not run in the browser. We will use a tool called [ESBuild](https://github.com/evanw/esbuild) which can transpile and bundle our code within the browser.
+The issue is that Webpack does not run in the browser. We will use a tool called [ESBuild](https://github.com/evanw/esbuild) which can transpile and bundle our code within the browser. Using `args.path` for they key. 
 
+---
+
+Uses [localForage](https://www.npmjs.com/package/localforage) to handle caching of multiple network requests.
+```js
+const fileCache = localForage.createInstance({ // can use this to set and get an item in the database. 
+  name: 'fileCache',
+});
+
+(async () => {
+  await fileCache.setItem('color', 'red'); // set an item in the database
+  const color = await fileCache.getItem('color'); // get an item from the database
+  console.log(color); // 'red'
+})()
+```
