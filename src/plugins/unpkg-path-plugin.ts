@@ -1,18 +1,13 @@
 import * as esbuild from 'esbuild-wasm';
-import axios from 'axios';
-import localForage from 'localforage';
 
-const fileCache = localForage.createInstance({
-  // can use this to set and get an item in the database.
-  name: 'fileCache',
-});
 
-export const unpkgPathPlugin = (inputCode: string) => {
+export const unpkgPathPlugin = () => {
   return {
     name: 'unpkg-path-plugin',
     setup(build: esbuild.PluginBuild) {
       // onResolve is called whenever ESBuild is trying to figure out a path to a particular module.
 
+      // handle  root entry of 'index.js'
       build.onResolve({ filter: /(^index\.js$)/ }, () => {
         return {
           path: 'index.js',
@@ -20,6 +15,7 @@ export const unpkgPathPlugin = (inputCode: string) => {
         };
       });
 
+      //handle relative paths in a module
       build.onResolve({ filter: /^\.+\// }, (args: any) => {
         return {
           namespace: 'a',
@@ -28,6 +24,7 @@ export const unpkgPathPlugin = (inputCode: string) => {
         };
       });
 
+      // handle main file of a module
       build.onResolve({ filter: /.*/ }, async (args: any) => {
         return {
           namespace: 'a',
@@ -35,39 +32,7 @@ export const unpkgPathPlugin = (inputCode: string) => {
         };
       });
 
-      // onLoad is called whenever ESBuild is trying to load a particular module.
-      build.onLoad({ filter: /.*/ }, async (args: any) => {
-        console.log('onLoad', args);
 
-        if (args.path === 'index.js') {
-          return {
-            loader: 'jsx',
-            contents: inputCode,
-          };
-        }
-
-        // check to see if we have already fetched this file
-        // and if it has been cached in fileCache
-        const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(
-          args.path
-        );
-        //if it is cached, return it
-        if (cachedResult) {
-          return cachedResult;
-        }
-
-        const { data, request } = await axios.get(args.path);
-
-        const result: esbuild.OnLoadResult = {
-          loader: 'jsx',
-          contents: data,
-          resolveDir: new URL('./', request.responseURL).pathname,
-        };
-        // store response in cache
-        await fileCache.setItem(args.path, result);
-
-        return result;
-      });
     },
   };
 };
