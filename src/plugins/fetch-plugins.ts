@@ -33,11 +33,28 @@ export const fetchPlugin = (inputCode: string) => {
 
         const { data, request } = await axios.get(args.path);
 
-        const loader = args.path.match(/.css$/) ? 'css' : 'jsx';
+        const fileType = args.path.match(/.css$/) ? 'css' : 'jsx';
+        // CSS string that can be placed in the js snippet
+        const escaped = data
+          .replace(/\n/g, '') // remove newlines
+          .replace(/"/g, '\\"') // escape double quotes
+          .replace(/'/g, "\\'"); // escape single quotes
+
+        //getting CSS through esbuild
+        // wont be able to use URL links or @import's
+        const contents =
+          fileType === 'css'
+            ? `
+        const style = document.createElement('style');
+        style.innerText = '${escaped}';
+        document.head.appendChild(style);
+        
+        `
+            : data;
 
         const result: esbuild.OnLoadResult = {
-          loader,
-          contents: data,
+          loader: 'jsx',
+          contents,
           resolveDir: new URL('./', request.responseURL).pathname,
         };
         // store response in cache
