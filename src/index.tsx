@@ -10,17 +10,17 @@ const App = () => {
   const [code, setCode] = useState(''); // transpiled code to show in the pre element
 
   // initialize esbuild
-  const startServer = async () => {
+  const startService = async () => {
     // can now refer to re.current anywhere in our component we created in ESBuild
     ref.current = await esbuild.startService({
       worker: true,
-      wasmURL: './esbuild.wasm',
+      wasmURL: 'https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm',
     });
   };
 
   // run once when the component is mounted
   useEffect(() => {
-    startServer();
+    startService();
   }, []);
 
   const onClick = async () => {
