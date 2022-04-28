@@ -21,8 +21,8 @@ export const fetchPlugin = (inputCode: string) => {
         };
       });
 
-      // onload for css
-      build.onLoad({ filter: /.css$/ }, async (args: any) => {
+      // for all other files
+      build.onLoad({ filter: /.*/ }, async (args: any) => {
         // check to see if we have already fetched this file
         // and if it has been cached in fileCache
         const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(
@@ -32,7 +32,10 @@ export const fetchPlugin = (inputCode: string) => {
         if (cachedResult) {
           return cachedResult;
         }
+      });
 
+      // onload for css
+      build.onLoad({ filter: /.css$/ }, async (args: any) => {
         const { data, request } = await axios.get(args.path);
 
         // CSS string that can be placed in the js snippet
@@ -62,16 +65,6 @@ export const fetchPlugin = (inputCode: string) => {
 
       // onload for plain JS files
       build.onLoad({ filter: /.*/ }, async (args: any) => {
-        // check to see if we have already fetched this file
-        // and if it has been cached in fileCache
-        const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(
-          args.path
-        );
-        //if it is cached, return it
-        if (cachedResult) {
-          return cachedResult;
-        }
-
         const { data, request } = await axios.get(args.path);
 
         const result: esbuild.OnLoadResult = {
