@@ -35,12 +35,24 @@ The code might have advanced JavaScript syntax in it (e.g. JSX) which the browse
 
 The code might have import statement for other JavaScript or CSS. We have to deal with those import statements *before* executing the code.
 
+## Considerations when running user code in the browser
+- User-provided code might throw and error, causing our application to crash. 
+  - Handling infinite loops.
+- User-provided code might mutate the DOM, causing the application to crash. 
+  - `document.body.innerHTML = ''` will clear our DOM.
+- A user might accidentally run code which is malicious.
+
+### General Solution
+
+`iFrame` is a good solution for this problem. See details [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
+
 
 ---
  
-We will use a bundler to automatically find all the modules to user has imported from NPM. 
 
 ## Bundling Options
+
+We will use a bundler to automatically find all the modules to user has imported from NPM. 
 
 **Option 1**: React app sends code to the backend API server, which runs Webpack. Webpack will find the missing modules. We will use a plugin to automatically find the modules called [NpmInstallWebpackPlugin](https://v4.webpack.js.org/plugins/npm-install-webpack-plugin/). Once the modules are found, Webpack will bundle them together into a single file and send it back to the React app.
 

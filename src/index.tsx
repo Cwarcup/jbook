@@ -41,7 +41,14 @@ const App = () => {
     });
     // console.log(result);
 
-    setCode(result.outputFiles[0].text); // set the transpiled code
+    setCode(result.outputFiles[0].text); // set the transpiled and bundled code
+
+    try {
+      eval(result.outputFiles[0].text); // run the code
+    } catch (err) {
+      alert(err);
+      console.log(err);
+    }
   };
 
   return (
@@ -49,11 +56,17 @@ const App = () => {
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        style={{ width: '50%', height: '200px' }}
       ></textarea>
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
       <pre>{code}</pre>
+      <iframe
+        src="/test.html"
+        style={{ width: '50%', height: '200px' }}
+        sandbox=""
+      ></iframe>
     </div>
   );
 };
