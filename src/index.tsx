@@ -23,6 +23,7 @@ const App = () => {
     startService();
   }, []);
 
+  // where we are building our bundle
   const onClick = async () => {
     if (!ref.current) {
       return;
@@ -39,17 +40,17 @@ const App = () => {
         global: 'window',
       },
     });
-    // console.log(result);
 
+    // output the transpiled code stored in 'code'
     setCode(result.outputFiles[0].text); // set the transpiled and bundled code
-
-    try {
-      eval(result.outputFiles[0].text); // run the code
-    } catch (err) {
-      alert(err);
-      console.log(err);
-    }
   };
+
+  // ensures the code we pass to the iframe is a script containing the code we want to run
+  const html = `
+    <script>
+      ${code}
+    </script>
+  `;
 
   return (
     <div>
@@ -63,9 +64,9 @@ const App = () => {
       </div>
       <pre>{code}</pre>
       <iframe
-        src="/test.html"
+        srcDoc={html}
         style={{ width: '50%', height: '200px' }}
-        sandbox=""
+        sandbox="allow-scripts"
       ></iframe>
     </div>
   );

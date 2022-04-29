@@ -29,7 +29,7 @@ Creating a cell to accept markdown and render it as markdown.
 
 Code cell needs to take in some code, render it, and display the result in a preview window. 
 
-Code will be provided to Preview as a *sting*. We have to execute it safely. The code may have a syntax error, therefore,we need to ensure this doesn't crash the application. 
+Code will be provided to Preview as a *sting*. We have to execute it safely. The code may have a syntax error, therefore, we need to ensure this doesn't crash the application. 
 
 The code might have advanced JavaScript syntax in it (e.g. JSX) which the browser can not execute. Need to preprocess this code before executing it.
 
@@ -44,8 +44,7 @@ The code might have import statement for other JavaScript or CSS. We have to dea
 
 ### General Solution
 
-`iFrame` is a good solution for this problem. See details [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
-
+`iFrame` is a good solution for this problem. See details [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). Need to also disable direct communication between the child and parent.
 
 ---
  
