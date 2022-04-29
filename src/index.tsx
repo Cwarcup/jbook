@@ -6,6 +6,7 @@ import { fetchPlugin } from './plugins/fetch-plugins';
 
 const App = () => {
   const ref = useRef<any>();
+  const iframe = useRef<any>();
   const [input, setInput] = useState('');
   const [code, setCode] = useState(''); // transpiled code to show in the pre element
 
@@ -42,14 +43,24 @@ const App = () => {
     });
 
     // output the transpiled code stored in 'code'
-    setCode(result.outputFiles[0].text); // set the transpiled and bundled code
+    // setCode(result.outputFiles[0].text); // set the transpiled and bundled code
+    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*');
   };
 
   // ensures the code we pass to the iframe is a script containing the code we want to run
   const html = `
-    <script>
-      ${code}
-    </script>
+    <html>
+      <head>
+      </head>
+      <body>
+        <div id="root"></div>
+        <script>
+          window.addEventListener('message', (event) => {
+            eval(event.data);
+          }, false);
+        </script>
+      </body>
+    </html>
   `;
 
   return (
@@ -64,6 +75,7 @@ const App = () => {
       </div>
       <pre>{code}</pre>
       <iframe
+        ref={iframe}
         srcDoc={html}
         style={{ width: '50%', height: '200px' }}
         sandbox="allow-scripts"
