@@ -101,3 +101,4 @@ Unpkg to fetch NPM modules.
 Uses [Monaco Editor](https://www.npmjs.com/package/@monaco-editor/react/v/3.7.4) to render code.
 Includes [Prettier](https://www.npmjs.com/package/prettier) to format code.
 Bumla for CSS.
+React-resizable for resizing windows. 
