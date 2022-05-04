@@ -10,6 +10,13 @@
   height: 100%;
 }
 
+.preview-error {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: red;
+}
+
 /* empty div on top of the preview to allow resizing */
 .react-draggable-transparent-selection .preview-wrapper:after {
   content: '';
