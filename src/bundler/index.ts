@@ -1,11 +1,8 @@
-// logic for ES build
 import * as esbuild from 'esbuild-wasm';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
-import { fetchPlugin } from './plugins/fetch-plugins';
+import { fetchPlugin } from './plugins/fetch-plugin';
 
 let service: esbuild.Service;
-
-//initialize ESBuild
 const bundle = async (rawCode: string) => {
   if (!service) {
     service = await esbuild.startService({
@@ -20,7 +17,6 @@ const bundle = async (rawCode: string) => {
     write: false,
     plugins: [unpkgPathPlugin(), fetchPlugin(rawCode)],
     define: {
-      // replace specific values in the code if found
       'process.env.NODE_ENV': '"production"',
       global: 'window',
     },

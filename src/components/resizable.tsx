@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import { ResizableBox } from 'react-resizable';
 
 interface ResizableProps {

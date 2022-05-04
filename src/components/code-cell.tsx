@@ -5,10 +5,9 @@ import bundle from '../bundler';
 import Resizable from './resizable';
 
 const CodeCell = () => {
-  const [input, setInput] = useState('');
   const [code, setCode] = useState('');
+  const [input, setInput] = useState('');
 
-  // building our bundle
   const onClick = async () => {
     const output = await bundle(input);
     setCode(output);
@@ -18,13 +17,12 @@ const CodeCell = () => {
     <Resizable direction="vertical">
       <div>
         <CodeEditor
-          initialValue="const a = 1"
+          initialValue="const a = 1;"
           onChange={(value) => setInput(value)}
         />
         <div>
           <button onClick={onClick}>Submit</button>
         </div>
-
         <Preview code={code} />
       </div>
     </Resizable>

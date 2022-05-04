@@ -1,12 +1,15 @@
+import './code-editor.css';
+import './syntax.css';
 import { useRef } from 'react';
 import MonacoEditor, { EditorDidMount } from '@monaco-editor/react';
-// import { editor } from 'monaco-editor';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
-import './code-editor.css';
+import codeShift from 'jscodeshift';
+import Highlighter from 'monaco-jsx-highlighter';
+
 interface CodeEditorProps {
   initialValue: string;
-  onChange: (value: string) => void;
+  onChange(value: string): void;
 }
 
 const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
@@ -19,12 +22,26 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
     });
 
     monacoEditor.getModel()?.updateOptions({ tabSize: 2 });
+
+    const highlighter = new Highlighter(
+      // @ts-ignore
+      window.monaco,
+      codeShift,
+      monacoEditor
+    );
+    highlighter.highLightOnDidChangeModelContent(
+      () => {},
+      () => {},
+      undefined,
+      () => {}
+    );
   };
 
   const onFormatClick = () => {
-    // get current value from editor. Use a ref to get the value.
-    const unformatted = editorRef.current.getModel().getValue(); // get the value from the editor
-    //format that value
+    // get current value from editor
+    const unformatted = editorRef.current.getModel().getValue();
+
+    // format that value
     const formatted = prettier
       .format(unformatted, {
         parser: 'babel',
@@ -33,27 +50,26 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
         semi: true,
         singleQuote: true,
       })
-      .replace(/\n$/, ''); // remove the last newline
+      .replace(/\n$/, '');
 
-    // set formatted value back in the editor
-    editorRef.current.getModel().setValue(formatted);
+    // set the formatted value back in the editor
+    editorRef.current.setValue(formatted);
   };
 
   return (
     <div className="editor-wrapper">
       <button
-        className="button button-format is-primary is-small "
+        className="button button-format is-primary is-small"
         onClick={onFormatClick}
       >
         Format
       </button>
-
       <MonacoEditor
         editorDidMount={onEditorDidMount}
         value={initialValue}
-        height="45vh"
-        language="javascript"
         theme="dark"
+        language="javascript"
+        height="500px"
         options={{
           wordWrap: 'on',
           minimap: { enabled: false },
@@ -61,7 +77,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
           folding: false,
           lineNumbersMinChars: 3,
           fontSize: 16,
-          scrollBeyondLastLine: true,
+          scrollBeyondLastLine: false,
           automaticLayout: true,
         }}
       />
