@@ -1,11 +1,13 @@
 .preview-wrapper {
   position: relative;
   height: 100%;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .preview-wrapper iframe {
+  width: 100%;
   height: 100%;
-  background-color: white;
 }
 
 /* empty div on top of the preview to allow resizing */
