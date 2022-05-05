@@ -25,13 +25,14 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
       const { id, content } = action.payload;
       // update cell context
       state.data[id].content = content; // using the immer library makes this much simpler
-      return;
+
+      return state;
 
     case ActionType.DELETE_CELL:
       // have to delete the data and the order
       delete state.data[action.payload]; // object mutation
       state.order = state.order.filter((id) => id !== action.payload); // array mutation
-      return;
+      return state;
 
     case ActionType.MOVE_CELL:
       const { direction } = action.payload;
@@ -40,14 +41,14 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
 
       if (targetIndex < 0 || targetIndex > state.order.length - 1) {
         // if target index is out of bounds, do nothing
-        return;
+        return state;
       }
 
       // swap the order of the two cells
       state.order[index] = state.order[targetIndex];
       state.order[targetIndex] = action.payload.id;
 
-      return;
+      return state;
 
     case ActionType.INSERT_CELL_BEFORE:
       //generate new cell
@@ -67,12 +68,12 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
         state.order.splice(foundIndex, 0, cell.id);
       }
 
-      return;
+      return state;
 
     default:
       return state;
   }
-});
+}, initialState);
 
 // randomly generate a cell id
 const randomId = () => {

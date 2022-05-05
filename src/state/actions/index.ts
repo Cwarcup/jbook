@@ -20,7 +20,7 @@ export interface DeleteCellAction {
 export interface InsertCellBeforeAction {
   type: ActionType.INSERT_CELL_BEFORE;
   payload: {
-    id: string;
+    id: string | null
     type: CellTypes;
   };
 }
@@ -28,7 +28,7 @@ export interface InsertCellBeforeAction {
 export interface UpdateCellAction {
   type: ActionType.UPDATE_CELL;
   payload: {
-    id: string | null;
+    id: string;
     content: string;
   };
 }
