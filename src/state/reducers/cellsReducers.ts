@@ -18,7 +18,6 @@ const initialState: CellsState = {
   data: {},
 };
 
-//creating redux store
 const reducer = (
   state: CellsState = initialState,
   action: Action
@@ -36,7 +35,5 @@ const reducer = (
       return state;
   }
 };
-
-
 
 export default reducer;
