@@ -82,21 +82,6 @@ The issue is that Webpack does not run in the browser. We will use a tool called
 ---
 
 Uses [localForage](https://www.npmjs.com/package/localforage) to handle caching of multiple network requests.
-```js
-const fileCache = localForage.createInstance({ // can use this to set and get an item in the database. 
-  name: 'fileCache',
-});
-
-(async () => {
-  await fileCache.setItem('color', 'red'); // set an item in the database
-  const color = await fileCache.getItem('color'); // get an item from the database
-  console.log(color); // 'red'
-})()
-```
-
-
----
-
 Uses [ESBuild](https://esbuild.github.io/) to transpile and bundle our code. 
 [Unpkg](https://unpkg.com/) to fetch NPM modules.
 Uses [Monaco Editor](https://www.npmjs.com/package/@monaco-editor/react/v/3.7.4) to render code.
@@ -104,3 +89,5 @@ Includes [Prettier](https://www.npmjs.com/package/prettier) to format code.
 [Bulmaswatch](https://jenil.github.io/bulmaswatch/) for CSS.
 [React-resizable](https://www.npmjs.com/package/react-resizable) for resizing windows. 
 [uiw/react-md-editor](https://www.npmjs.com/package/@uiw/react-md-editor) for markdown editor.
+[React-redux](https://react-redux.js.org/) for state management.
+[Immer](https://immerjs.github.io/immer/update-patterns) to handle state changes.
