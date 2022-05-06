@@ -52,7 +52,7 @@ const Preview: React.FC<PreviewProps> = ({ code, err }) => {
         ref={iframe}
         sandbox="allow-scripts"
         srcDoc={html}
-        style={{ backgroundColor: '#EEEEEE' }}
+        style={{ backgroundColor: 'white' }}
       />
       {err && <div className="preview-error">{err}</div>}
     </div>
