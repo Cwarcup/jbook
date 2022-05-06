@@ -4,11 +4,13 @@ import { Action } from '../actions';
 
 // interface to describe the state of the bundle reducer
 interface BundlesState {
-  [key: string]: {
-    loading: boolean; // determines if the bundle is loading/bundling/processing
-    code: string;
-    err: string;
-  };
+  [key: string]:
+    | {
+        loading: boolean; // determines if the bundle is loading/bundling/processing
+        code: string;
+        err: string;
+      }
+    | undefined;
 }
 
 // initialize a state object with the initial state
@@ -34,9 +36,10 @@ const reducer = produce(
         };
         return state;
       default:
-        break;
+        return state;
     }
-  }
+  },
+  initialState
 );
 
 //export reduce
