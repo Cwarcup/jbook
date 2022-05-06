@@ -50,7 +50,7 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
 
       return state;
 
-    case ActionType.INSERT_CELL_BEFORE:
+    case ActionType.INSERT_CELL_AFTER:
       //generate new cell
       const cell: Cell = {
         content: '',
@@ -58,14 +58,18 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
         id: randomId(),
       };
 
-      state.data[cell.id] = cell;
+      state.data[cell.id] = cell; // add new cell to data object
+
       const foundIndex = state.order.findIndex(
+        // find the index of the cell to insert after
         (id) => id === action.payload.id
       );
+
       if (foundIndex < 0) {
-        state.order.push(cell.id);
+        // if the cell we want to insert after doesn't exist
+        state.order.unshift(cell.id); // add the cell to the beginning of the order
       } else {
-        state.order.splice(foundIndex, 0, cell.id);
+        state.order.splice(foundIndex + 1, 0, cell.id); // insert the cell after the cell we want to insert after
       }
 
       return state;
