@@ -10,3 +10,9 @@
 .textarea {
   border-radius: 0rem !important;
 }
+
+.action-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
