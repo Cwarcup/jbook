@@ -1,0 +1,12 @@
+.button,
+.file-cta,
+.file-name,
+.input,
+.pagination-ellipsis,
+.pagination-link,
+.pagination-next,
+.pagination-previous,
+.select select,
+.textarea {
+  border-radius: 0rem !important;
+}

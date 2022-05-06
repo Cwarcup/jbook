@@ -91,3 +91,4 @@ Includes [Prettier](https://www.npmjs.com/package/prettier) to format code.
 [uiw/react-md-editor](https://www.npmjs.com/package/@uiw/react-md-editor) for markdown editor.
 [React-redux](https://react-redux.js.org/) for state management.
 [Immer](https://immerjs.github.io/immer/update-patterns) to handle state changes.
+[fortawesome/fontawesome-free](https://www.npmjs.com/package/@fortawesome/fontawesome-free) for icons.
