@@ -24,6 +24,7 @@ const bundle = async (rawCode: string) => {
       },
     });
 
+    // output of the bundle (both strings)
     return {
       code: result.outputFiles[0].text,
       err: '',
@@ -32,7 +33,7 @@ const bundle = async (rawCode: string) => {
     return {
       code: '',
       err: err.message,
-    }
+    };
   }
 };
 
