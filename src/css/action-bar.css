@@ -8,7 +8,7 @@
 .pagination-previous,
 .select select,
 .textarea {
-  border-radius: 0rem !important;
+  border-radius: 0rem;
 }
 
 .action-bar {
