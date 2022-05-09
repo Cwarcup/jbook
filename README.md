@@ -99,3 +99,22 @@ Includes [Prettier](https://www.npmjs.com/package/prettier) to format code.
 code cells communicate between each other. For example, if you import a module in one cell, it will be available in the next cell.
 
 Built in `show()` function to display content from the code cell in the preview window. Can accept a number, a string, an array, object, or even a component. Will automatically render JSX without having to import React and ReactDOM if the show() function is called.
+
+User can show a react component using the `show()` function:
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+const App = () => {
+  return <h1> component </h1>
+}
+
+show(<App />)
+
+show(
+  <div>
+    <App />
+    <App />
+  </div>
+);
+```
