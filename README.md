@@ -92,3 +92,9 @@ Includes [Prettier](https://www.npmjs.com/package/prettier) to format code.
 [React-redux](https://react-redux.js.org/) for state management.
 [Immer](https://immerjs.github.io/immer/update-patterns) to handle state changes.
 [fortawesome/fontawesome-free](https://www.npmjs.com/package/@fortawesome/fontawesome-free) for icons.
+
+
+---
+
+code cells communicate between each other. For example, if you import a module in one cell, it will be available in the next cell.
+
