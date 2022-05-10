@@ -118,3 +118,14 @@ show(
   </div>
 );
 ```
+
+# Local Storage
+
+Local storage is used to store the code cells.
+- User can run `npx jbook serve` to start the server. User navigates to localhost:4005 to view the application.
+- The CLI will start up a local node server with Express.
+  - The CLI serve up the application on localhost:4050.
+  - It writes any changes the user makes to the users local machine.
+  - Loads up the local files at launch if they exist.
+
+Lerna is used to manage multiple packages.
