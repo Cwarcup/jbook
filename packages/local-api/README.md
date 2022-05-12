@@ -1,0 +1,14 @@
+# Local-API
+
+Will be run on the users machine when they use jbook application. User will not being running the development server because it takes up a lot of resources and is slow to start up.
+
+`get /` Sends back index.html or index.js for React App. Will get loaded in users browser.
+
+`get /cells` Find the list of cells stored in a file (name provided in the CLI) and sends those back to the browser.
+
+`post /cells` Take the list of cells from the browser and stores them into a file.
+
+
+---
+
+Using express to handle the requests.
