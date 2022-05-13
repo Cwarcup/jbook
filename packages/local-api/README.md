@@ -36,3 +36,9 @@ When we are actively developing our app on our local machine, we want to use the
 
 When we are running our app on a user machine, we want to serve up the build files from build directory. 
 
+Inside of CLI, we need to decide if we are running on our local machine for development or on a user machine for production. Before we ship to NPM, we must run a script to search for 'NODE_ENV" and set it to 'production'.
+
+```js
+const isProduction = process.env.NODE_ENV === 'production'; // keep for local machine
+const isProduction = 'production' === 'production'; // keep for production when shipping to NPM
+```
