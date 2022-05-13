@@ -12,3 +12,10 @@ Will be run on the users machine when they use jbook application. User will not 
 ---
 
 Using express to handle the requests.
+
+
+---
+
+cli/dlist: `node index.js server` Runs on port 4005
+root packages: `npm run start` Runs on port 3000
+Create new build: local-client: `npm run build`
