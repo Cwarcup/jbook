@@ -14,21 +14,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCellsRouter = void 0;
 const express_1 = __importDefault(require("express"));
+const promises_1 = __importDefault(require("fs/promises"));
+const path_1 = __importDefault(require("path"));
 const createCellsRouter = (filename, dir) => {
     const router = express_1.default.Router();
+    const fullPath = path_1.default.join(dir, filename);
     router.get('/cells', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        // Make sure cell storage file exists (user provides this in CLI)
-        // If file does not exist, add in default list of cells.
-        // Read the file
-        // Parse a list of cells from the file
-        // Return the list of cells to browser
+        try {
+            // Read the file
+            const result = yield promises_1.default.readFile(fullPath, { encoding: 'utf8' });
+            // Parse a list of cells from the file
+            // Return the list of cells to browser
+            res.send(JSON.parse(result));
+        }
+        catch (err) {
+            if (err.code === 'ENOENT') {
+                // add code to create a file and add default cells
+                yield promises_1.default.writeFile(fullPath, '[]', 'utf-8');
+                res.send([]);
+            }
+            else {
+                throw err;
+            }
+        }
     }));
     router.post('/cells', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Make sure file exists
-        // If not, create it
+        // If not, it will be created automatically
         // Take the list of cells from the request obj
         // Serialize the list
+        const { cells } = req.body;
         // Write the serialized list to the file
+        yield promises_1.default.writeFile(fullPath, JSON.stringify(cells), 'utf-8');
+        res.send({ status: 'ok' });
     }));
     return router;
 };
