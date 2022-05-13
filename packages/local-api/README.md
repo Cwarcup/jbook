@@ -19,3 +19,14 @@ Using express to handle the requests.
 cli/dlist: `node index.js server` Runs on port 4005
 root packages: `npm run start` Runs on port 3000
 Create new build: local-client: `npm run build`
+
+# Adding packages:
+```
+lerna add --scope=<file name> <package name>  
+```
+
+# Lera - link packages
+
+```
+lerna add local-client --scope=local-api
+```

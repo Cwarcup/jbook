@@ -132,3 +132,5 @@ Local storage is used to store the code cells.
 Make sure you add npm modules like so: `lerna add commander --scope=cli`. This ensures that express is **only** added into the cli sub-project.
 
 [Commander](https://www.npmjs.com/package/commander) to help manage the CLI.
+
+Use express.static() to serve up static files from build.
