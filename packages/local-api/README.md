@@ -30,3 +30,9 @@ lerna add --scope=<file name> <package name>
 ```
 lerna add local-client --scope=local-api
 ```
+
+# Which packages to serve?
+When we are actively developing our app on our local machine, we want to use the local-api package with create-react-app dev server.
+
+When we are running our app on a user machine, we want to serve up the build files from build directory. 
+
