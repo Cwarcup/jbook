@@ -6,8 +6,5 @@
   },
   "scripts": {
     "start": "lerna run start --parallel"
-  },
-  "publicConfig": {
-    "access": "public"
   }
 }
