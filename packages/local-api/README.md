@@ -16,6 +16,14 @@ Using express to handle the requests.
 
 ---
 
+# How to run locally
+
+```
+cd cli
+cd dist
+node index.js serve
+```
+
 cli/dlist: `node index.js server` Runs on port 4005
 root packages: `npm run start` Runs on port 3000
 Create new build: local-client: `npm run build`
