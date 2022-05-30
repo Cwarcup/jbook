@@ -22,6 +22,9 @@ Using express to handle the requests.
 cd cli
 cd dist
 node index.js serve
+
+//in jbook
+npm start
 ```
 
 cli/dlist: `node index.js server` Runs on port 4005

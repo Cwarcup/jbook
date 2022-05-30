@@ -26,7 +26,9 @@ export const serve = (
     // serve up production build
     // require.resolve is used to resolve the path to the file. Built in nodejs function.
     // Will find the local-client file in the node_modules folder, NOT the file in the root of the project.
-    const packagePath = require.resolve('local-client/build/index.html');
+    const packagePath = require.resolve(
+      '@jsbooks/local-client/build/index.html'
+    );
 
     // serve up everything up to build folder
     app.use(express.static(path.dirname(packagePath)));

@@ -1,6 +1,6 @@
 import path from 'path';
 import { Command } from 'commander';
-import { serve } from 'local-api';
+import { serve } from '@jsbooks/local-api';
 
 const isProduction = process.env.NODE_ENV === 'production'; // keep for local machine
 // const isProduction = 'production' === 'production'; // keep for production when shipping to NPM
