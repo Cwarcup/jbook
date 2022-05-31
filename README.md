@@ -39,4 +39,6 @@ Follow the instructions in terminal and navigate to "http://localhost:4005/".
 Clone the repository and cd into `jbook`. Run command `npm run start` to start up the compilers.
 
 
-Change into the `cli` directory and run `node index.js serve` to start the server.
+Change into the `cli` directory and run `node index.js serve` to start the server. Navigate to "http://localhost:4005/".
+
+Push to lerna with `lerna publish --no-push` to publish the project on npm.
